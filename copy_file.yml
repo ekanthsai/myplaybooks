@@ -1,0 +1,11 @@
+---
+- name: Copying the file
+  hosts: all
+  become: yes
+  tasks:
+  - name : File copy
+    copy:
+      src: /home/ansadmin/index.html
+      dest: /home/ansadmin/
+      mode: 0644
+      owner: Rohit

@@ -1,0 +1,9 @@
+---
+- name: Packages
+  hosts: all
+  become: true
+  tasks:
+  - name: Install Pakgs
+    yum:
+      name: tree
+      state: present

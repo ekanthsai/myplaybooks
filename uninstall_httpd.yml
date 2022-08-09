@@ -1,0 +1,14 @@
+---
+- name: Uninstall httpd Package
+  hosts: all
+  become: yes
+  tasks:
+  - name: stop httpd pkg
+    service:
+      name: httpd
+      state: stopped
+
+  - name: Remove httpd pkg
+    yum:
+      name: httpd
+      state: absent

@@ -1,0 +1,36 @@
+---
+- name: This is my playbook
+  hosts: all
+  become: yes
+  tasks:
+  - name: Install httpd pkg
+    yum:
+      name: httpd
+      state: installed
+    when: ansible_os_family == "RedHat"
+
+  - name: Service httpd start
+    service:
+      name: http---    # Giving bug intentionally
+      state: started
+    when: ansible_os_family == "RedHat"
+    ignore_errors: yes
+
+  - name: Install apache2 pkg
+    apt:
+      name: apache2
+      state: present
+    when: ansible_os_family == "Debian"
+
+  - name: Service apache2 start
+    service:
+      name: apache2
+      state: started
+    when: ansible_os_family == "Debian"
+    ignore_errors: yes
+
+  - name: copy index.html
+    copy:
+      src: /home/ansadmin/index.html
+      dest: /var/www/html
+      mode: 0666
